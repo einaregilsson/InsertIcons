@@ -2,9 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "win32icons", "win32icons.csproj", "{C037D608-57FD-4ACD-AAC1-BFAD1767B11B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{75B6B9E6-3370-401D-B4D7-9624FDBB96DD} = {75B6B9E6-3370-401D-B4D7-9624FDBB96DD}
-	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "win32icons.test", "win32icons.test\win32icons.test.csproj", "{D6033991-9D86-42AB-92F9-BB510733E464}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,6 +15,10 @@ Global
 		{C037D608-57FD-4ACD-AAC1-BFAD1767B11B}.Debug|x86.Build.0 = Debug|x86
 		{C037D608-57FD-4ACD-AAC1-BFAD1767B11B}.Release|x86.ActiveCfg = Release|x86
 		{C037D608-57FD-4ACD-AAC1-BFAD1767B11B}.Release|x86.Build.0 = Release|x86
+		{D6033991-9D86-42AB-92F9-BB510733E464}.Debug|x86.ActiveCfg = Debug|x86
+		{D6033991-9D86-42AB-92F9-BB510733E464}.Debug|x86.Build.0 = Debug|x86
+		{D6033991-9D86-42AB-92F9-BB510733E464}.Release|x86.ActiveCfg = Release|x86
+		{D6033991-9D86-42AB-92F9-BB510733E464}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

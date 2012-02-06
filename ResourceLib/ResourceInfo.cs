@@ -146,7 +146,7 @@ namespace Vestris.ResourceLib
                 }
             }
 
-            return new GenericResource(hModule, hResourceGlobal, type, name, wIDLanguage, size);
+            return null;
         }
 
         /// <summary>

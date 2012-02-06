@@ -12,9 +12,14 @@ namespace EinarEgilsson.Utilities.Win32Icons
     {
         static void Main(string[] args)
         {
-            string file = args[0];
-            var winIconFile = new WinIconAssembly(file);
-            winIconFile.AddIcon(args[1]);
+            //string file = args[0];
+            var winIconFile = new WinIconAssembly(args[0]);
+            string newIcon = Path.Combine(Path.GetDirectoryName(args[0]), "icons", "cmd.ico");
+
+            winIconFile.AddIcon(newIcon);
+            newIcon = Path.Combine(Path.GetDirectoryName(args[0]), "icons", "sec.ico");
+
+            winIconFile.AddIcon(newIcon);
         }
     }
 }
