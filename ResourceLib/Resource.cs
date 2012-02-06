@@ -10,7 +10,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// A version resource.
     /// </summary>
-    public abstract class Resource
+    internal abstract class Resource
     {
         /// <summary>
         /// Resource type.
@@ -40,7 +40,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Version resource size in bytes.
         /// </summary>
-        public int Size
+        internal int Size
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Language ID.
         /// </summary>
-        public UInt16 Language
+        internal UInt16 Language
         {
             get
             {
@@ -66,7 +66,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Resource type.
         /// </summary>
-        public ResourceId Type
+        internal ResourceId Type
         {
             get
             {
@@ -77,7 +77,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// String representation of the resource type.
         /// </summary>
-        public string TypeName
+        internal string TypeName
         {
             get
             {
@@ -90,7 +90,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Resource name.
         /// </summary>
-        public ResourceId Name
+        internal ResourceId Name
         {
             get
             {
@@ -153,7 +153,7 @@ namespace Vestris.ResourceLib
         /// Load a resource from an executable (.exe or .dll) file.
         /// </summary>
         /// <param name="filename">An executable (.exe or .dll) file.</param>
-        public virtual void LoadFrom(string filename)
+        internal virtual void LoadFrom(string filename)
         {
             LoadFrom(filename, _type, _name, _language);
         }
@@ -237,7 +237,7 @@ namespace Vestris.ResourceLib
         /// Return resource data.
         /// </summary>
         /// <returns>Resource data.</returns>
-        public byte[] WriteAndGetBytes()
+        internal byte[] WriteAndGetBytes()
         {
             MemoryStream ms = new MemoryStream();
             BinaryWriter w = new BinaryWriter(ms, Encoding.Default);
@@ -250,7 +250,7 @@ namespace Vestris.ResourceLib
         /// Save a resource.
         /// </summary>
         /// <param name="filename">Name of an executable file (.exe or .dll).</param>
-        public virtual void SaveTo(string filename)
+        internal virtual void SaveTo(string filename)
         {
             SaveTo(filename, _type, _name, _language);
         }
@@ -272,7 +272,7 @@ namespace Vestris.ResourceLib
         /// Delete a resource from an executable (.exe or .dll) file.
         /// </summary>
         /// <param name="filename">Path to an executable file.</param>
-        public virtual void DeleteFrom(string filename)
+        internal virtual void DeleteFrom(string filename)
         {
             Delete(filename, _type, _name, _language);
         }

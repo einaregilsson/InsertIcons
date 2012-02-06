@@ -8,8 +8,8 @@
     <ProjectGuid>{C037D608-57FD-4ACD-AAC1-BFAD1767B11B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ResourceIcons</RootNamespace>
-    <AssemblyName>ResourceIcons</AssemblyName>
+    <RootNamespace>EinarEgilsson.Utilities.Win32Icons</RootNamespace>
+    <AssemblyName>win32icons</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -9,7 +9,7 @@ namespace Vestris.ResourceLib
     /// A resource Id.
     /// There're two types of resource Ids, reserved integer numbers (eg. RT_ICON) and custom string names (eg. "CUSTOM").
     /// </summary>
-    public class ResourceId
+    internal class ResourceId
     {
         private IntPtr _name = IntPtr.Zero;
 
@@ -17,7 +17,7 @@ namespace Vestris.ResourceLib
         /// A resource identifier.
         /// </summary>
         /// <param name="value">A integer or string resource id.</param>
-        public ResourceId(IntPtr value)
+        internal ResourceId(IntPtr value)
         {
             Id = value;
         }
@@ -26,7 +26,7 @@ namespace Vestris.ResourceLib
         /// A resource identifier.
         /// </summary>
         /// <param name="value">A integer resource id.</param>
-        public ResourceId(uint value)
+        internal ResourceId(uint value)
         {
             Id = new IntPtr(value);
         }
@@ -35,7 +35,7 @@ namespace Vestris.ResourceLib
         /// A well-known resource-type identifier.
         /// </summary>
         /// <param name="value">A well known resource type.</param>
-        public ResourceId(Kernel32.ResourceTypes value)
+        internal ResourceId(Kernel32.ResourceTypes value)
         {
             Id = (IntPtr) value;
         }
@@ -44,7 +44,7 @@ namespace Vestris.ResourceLib
         /// A custom resource identifier.
         /// </summary>
         /// <param name="value"></param>
-        public ResourceId(string value)
+        internal ResourceId(string value)
         {
             Name = value;
         }
@@ -55,7 +55,7 @@ namespace Vestris.ResourceLib
         /// <remarks>
         /// If the resource Id is a string, it will be copied.
         /// </remarks>
-        public IntPtr Id
+        internal IntPtr Id
         {
             get
             {
@@ -72,7 +72,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// An enumerated resource type for built-in resource types only.
         /// </summary>
-        public Kernel32.ResourceTypes ResourceType
+        internal Kernel32.ResourceTypes ResourceType
         {
             get
             {
@@ -91,7 +91,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Returns true if the resource is an integer resource.
         /// </summary>
-        public bool IsIntResource()
+        internal bool IsIntResource()
         {
             return IsIntResource(_name);
         }
@@ -108,7 +108,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Resource Id in a string format.
         /// </summary>
-        public string Name
+        internal string Name
         {
             get
             {

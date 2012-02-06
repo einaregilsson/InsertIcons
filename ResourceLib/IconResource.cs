@@ -7,7 +7,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// This structure depicts the organization of data in an icon resource.
     /// </summary>
-    public class IconResource : IconImageResource
+    internal class IconResource : IconImageResource
     {
         /// <summary>
         /// An existing icon resource.
@@ -40,7 +40,7 @@ namespace Vestris.ResourceLib
         /// <param name="id">Icon Id.</param>
         /// <param name="language">Resource language.</param>
         /// <returns>An icon resource.</returns>
-        public IconResource(IconFileIcon icon, ResourceId id, UInt16 language)
+        internal IconResource(IconFileIcon icon, ResourceId id, UInt16 language)
             : base(icon, new ResourceId(Kernel32.ResourceTypes.RT_ICON), id, language)
         {
 

@@ -10,7 +10,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// This structure depicts the organization of data in a hardware-independent icon resource.
     /// </summary>
-    public class IconDirectoryResource : DirectoryResource<IconResource>
+    internal class IconDirectoryResource : DirectoryResource<IconResource>
     {
         /// <summary>
         /// A hardware-independent icon resource.
@@ -39,7 +39,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// A new collection of icons that can be embedded into an executable file.
         /// </summary>
-        public IconDirectoryResource(IconFile iconFile)
+        internal IconDirectoryResource(IconFile iconFile)
             : base(Kernel32.ResourceTypes.RT_GROUP_ICON)
         {            
             for (UInt16 id = 0; id < iconFile.Icons.Count; id++)

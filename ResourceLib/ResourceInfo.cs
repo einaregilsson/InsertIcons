@@ -10,7 +10,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// Resource info manager.
     /// </summary>
-    public class ResourceInfo : IEnumerable<Resource>, IDisposable
+    internal class ResourceInfo : IEnumerable<Resource>, IDisposable
     {
         private IntPtr _hModule = IntPtr.Zero;
         private Dictionary<ResourceId, List<Resource>> _resources;
@@ -19,7 +19,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// A dictionary of resources, the key is the resource type, eg. "REGISTRY" or "16" (version).
         /// </summary>
-        public Dictionary<ResourceId, List<Resource>> Resources
+        internal Dictionary<ResourceId, List<Resource>> Resources
         {
             get
             {
@@ -30,7 +30,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// A shortcut for available resource types.
         /// </summary>
-        public List<ResourceId> ResourceTypes
+        internal List<ResourceId> ResourceTypes
         {
             get
             {
@@ -41,7 +41,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// A new resource info.
         /// </summary>
-        public ResourceInfo()
+        internal ResourceInfo()
         {
 
         }
@@ -49,7 +49,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Unload the previously loaded module.
         /// </summary>
-        public void Unload()
+        internal void Unload()
         {
             if (_hModule != IntPtr.Zero)
             {
@@ -62,7 +62,7 @@ namespace Vestris.ResourceLib
         /// Load an executable or a DLL and read its resources.
         /// </summary>
         /// <param name="filename">Source filename.</param>
-        public void Load(string filename)
+        internal void Load(string filename)
         {
             Unload();
 
@@ -180,7 +180,7 @@ namespace Vestris.ResourceLib
         /// Save resource to a file.
         /// </summary>
         /// <param name="filename">Target filename.</param>
-        public void Save(string filename)
+        internal void Save(string filename)
         {
             throw new NotImplementedException();
         }
@@ -198,7 +198,7 @@ namespace Vestris.ResourceLib
         /// </summary>
         /// <param name="type">Resource type.</param>
         /// <returns>A collection of resources of a given type.</returns>
-        public List<Resource> this[Kernel32.ResourceTypes type]
+        internal List<Resource> this[Kernel32.ResourceTypes type]
         {
             get
             {
@@ -215,7 +215,7 @@ namespace Vestris.ResourceLib
         /// </summary>
         /// <param name="type">Resource type.</param>
         /// <returns>A collection of resources of a given type.</returns>
-        public List<Resource> this[string type]
+        internal List<Resource> this[string type]
         {
             get
             {

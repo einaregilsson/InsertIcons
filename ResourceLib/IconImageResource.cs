@@ -11,7 +11,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// This structure depicts the organization of data in an icon resource.
     /// </summary>
-    public class IconImageResource : Resource
+    internal class IconImageResource : Resource
     {
         /// <summary>
         /// Directory header.
@@ -21,12 +21,12 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Actual image.
         /// </summary>
-        protected DeviceIndependentBitmap _image = new DeviceIndependentBitmap();
+        protected  DeviceIndependentBitmap _image = new DeviceIndependentBitmap();
 
         /// <summary>
         /// Hardware-independent icon directory header.
         /// </summary>
-        public Kernel32.GRPICONDIRENTRY Header
+        internal Kernel32.GRPICONDIRENTRY Header
         {
             get
             {
@@ -41,7 +41,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Embedded icon Id.
         /// </summary>
-        public ushort Id
+        internal ushort Id
         {
             get
             {
@@ -56,7 +56,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// An icon image.
         /// </summary>
-        public DeviceIndependentBitmap Image
+        internal DeviceIndependentBitmap Image
         {
             get
             {
@@ -86,7 +86,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// A new icon resource.
         /// </summary>
-        public IconImageResource(ResourceId type)
+        internal IconImageResource(ResourceId type)
             : base(IntPtr.Zero,
                 IntPtr.Zero,
                 type,
@@ -104,7 +104,7 @@ namespace Vestris.ResourceLib
         /// <param name="type">Resource type.</param>
         /// <param name="name">Resource id.</param>
         /// <param name="language">Resource language.</param>
-        public IconImageResource(IconFileIcon icon, ResourceId type, ResourceId name, UInt16 language)
+        internal IconImageResource(IconFileIcon icon, ResourceId type, ResourceId name, UInt16 language)
         {
             _name = name;
             _type = type;
@@ -123,7 +123,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Icon width in pixels.
         /// </summary>
-        public Byte Width
+        internal Byte Width
         {
             get
             {
@@ -138,7 +138,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Icon height in pixels.
         /// </summary>
-        public Byte Height
+        internal Byte Height
         {
             get
             {
@@ -153,7 +153,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Image size in bytes.
         /// </summary>
-        public UInt32 ImageSize
+        internal UInt32 ImageSize
         {
             get
             {
@@ -208,7 +208,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Icon pixel format.
         /// </summary>
-        public PixelFormat PixelFormat
+        internal PixelFormat PixelFormat
         {
             get
             {
@@ -235,7 +235,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Icon pixel format English standard string.
         /// </summary>
-        public string PixelFormatString
+        internal string PixelFormatString
         {
             get
             {
@@ -288,7 +288,7 @@ namespace Vestris.ResourceLib
         /// Save icon to a file.
         /// </summary>
         /// <param name="filename">Target executable file.</param>
-        public virtual void SaveIconTo(string filename)
+        internal virtual void SaveIconTo(string filename)
         {
             SaveTo(filename,
                 _type,

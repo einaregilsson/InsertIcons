@@ -10,12 +10,12 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// This structure depicts the organization of data in a .ico file.
     /// </summary>
-    public class IconFile
+    internal class IconFile
     {
         /// <summary>
         /// Resource type.
         /// </summary>
-        public enum GroupType
+        internal enum GroupType
         {
             /// <summary>
             /// Icon.
@@ -33,7 +33,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Type of the group icon resource.
         /// </summary>
-        public GroupType Type
+        internal GroupType Type
         {
             get
             {
@@ -48,7 +48,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Collection of icons in an .ico file.
         /// </summary>
-        public List<IconFileIcon> Icons
+        internal List<IconFileIcon> Icons
         {
             get
             {
@@ -64,7 +64,7 @@ namespace Vestris.ResourceLib
         /// An existing .ico file.
         /// </summary>
         /// <param name="filename">An existing icon (.ico) file.</param>
-        public IconFile(string filename)
+        internal IconFile(string filename)
         {
             LoadFrom(filename);
         }
@@ -73,7 +73,7 @@ namespace Vestris.ResourceLib
         /// Load from a .ico file.
         /// </summary>
         /// <param name="filename">An existing icon (.ico) file.</param>
-        public void LoadFrom(string filename)
+        internal void LoadFrom(string filename)
         {
             byte[] data = File.ReadAllBytes(filename);
 

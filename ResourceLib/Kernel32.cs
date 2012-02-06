@@ -6,32 +6,32 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// Kernel32.dll interop functions.
     /// </summary>
-    public abstract class Kernel32
+    internal abstract class Kernel32
     {
         /// <summary>
         /// A resource header.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-        public struct RESOURCE_HEADER
+        internal struct RESOURCE_HEADER
         {
             /// <summary>
             /// Header length.
             /// </summary>
-            public UInt16 wLength;
+            internal UInt16 wLength;
             /// <summary>
             /// Data length.
             /// </summary>
-            public UInt16 wValueLength;
+            internal UInt16 wValueLength;
             /// <summary>
             /// Resource type.
             /// </summary>
-            public UInt16 wType;
+            internal UInt16 wType;
 
             /// <summary>
             /// A new resource header of a given length.
             /// </summary>
             /// <param name="valueLength"></param>
-            public RESOURCE_HEADER(UInt16 valueLength)
+            internal RESOURCE_HEADER(UInt16 valueLength)
             {
                 wLength = 0;
                 wValueLength = valueLength;
@@ -42,7 +42,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Resource header type.
         /// </summary>
-        public enum RESOURCE_HEADER_TYPE
+        internal enum RESOURCE_HEADER_TYPE
         {
             /// <summary>
             /// Binary data.
@@ -62,16 +62,16 @@ namespace Vestris.ResourceLib
         /// or code page independent.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-        public struct VAR_HEADER
+        internal struct VAR_HEADER
         {
             /// <summary>
             /// Microsoft language identifier.
             /// </summary>
-            public UInt16 wLanguageIDMS;
+            internal UInt16 wLanguageIDMS;
             /// <summary>
             /// IBM code page number.
             /// </summary>
-            public UInt16 wCodePageIBM;
+            internal UInt16 wCodePageIBM;
         }
 
         /// <summary>
@@ -80,60 +80,60 @@ namespace Vestris.ResourceLib
         /// http://msdn.microsoft.com/en-us/library/ms647001.aspx
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct VS_FIXEDFILEINFO
+        internal struct VS_FIXEDFILEINFO
         {
             /// <summary>
             /// Contains the value 0xFEEF04BD. This is used with the szKey member of the VS_VERSIONINFO structure when searching a file for the VS_FIXEDFILEINFO structure. 
             /// </summary>
-            public UInt32 dwSignature;
+            internal UInt32 dwSignature;
             /// <summary>
             /// Specifies the binary version number of this structure. The high-order word of this member contains the major version number, and the low-order word contains the minor version number.
             /// </summary>
-            public UInt32 dwStrucVersion;
+            internal UInt32 dwStrucVersion;
             /// <summary>
             /// Specifies the most significant 32 bits of the file's binary version number. This member is used with dwFileVersionLS to form a 64-bit value used for numeric comparisons.
             /// </summary>
-            public UInt32 dwFileVersionMS;
+            internal UInt32 dwFileVersionMS;
             /// <summary>
             /// Specifies the least significant 32 bits of the file's binary version number. This member is used with dwFileVersionMS to form a 64-bit value used for numeric comparisons.
             /// </summary>
-            public UInt32 dwFileVersionLS;
+            internal UInt32 dwFileVersionLS;
             /// <summary>
             /// Specifies the most significant 32 bits of the binary version number of the product with which this file was distributed. This member is used with dwProductVersionLS to form a 64-bit value used for numeric comparisons.
             /// </summary>
-            public UInt32 dwProductVersionMS;
+            internal UInt32 dwProductVersionMS;
             /// <summary>
             /// Specifies the least significant 32 bits of the binary version number of the product with which this file was distributed. This member is used with dwProductVersionMS to form a 64-bit value used for numeric comparisons.
             /// </summary>
-            public UInt32 dwProductVersionLS;
+            internal UInt32 dwProductVersionLS;
             /// <summary>
             /// Contains a bitmask that specifies the valid bits in dwFileFlags. A bit is valid only if it was defined when the file was created. 
             /// </summary>
-            public UInt32 dwFileFlagsMask;
+            internal UInt32 dwFileFlagsMask;
             /// <summary>
             /// Contains a bitmask that specifies the Boolean attributes of the file.
             /// </summary>
-            public UInt32 dwFileFlags;
+            internal UInt32 dwFileFlags;
             /// <summary>
             /// Specifies the operating system for which this file was designed.
             /// </summary>
-            public UInt32 dwFileOS;
+            internal UInt32 dwFileOS;
             /// <summary>
             /// Specifies the general type of file. 
             /// </summary>
-            public UInt32 dwFileType;
+            internal UInt32 dwFileType;
             /// <summary>
             /// Specifies the function of the file.
             /// </summary>
-            public UInt32 dwFileSubtype;
+            internal UInt32 dwFileSubtype;
             /// <summary>
             /// Specifies the most significant 32 bits of the file's 64-bit binary creation date and time stamp.
             /// </summary>
-            public UInt32 dwFileDateMS;
+            internal UInt32 dwFileDateMS;
             /// <summary>
             /// Specifies the least significant 32 bits of the file's 64-bit binary creation date and time stamp.
             /// </summary>
-            public UInt32 dwFileDateLS;
+            internal UInt32 dwFileDateLS;
 
         }
 
@@ -142,20 +142,20 @@ namespace Vestris.ResourceLib
         /// http://msdn.microsoft.com/en-us/library/ms997538.aspx
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct GRPICONDIR
+        internal struct GRPICONDIR
         {
             /// <summary>
             /// Reserved, must be zero.
             /// </summary>
-            public UInt16 wReserved;
+            internal UInt16 wReserved;
             /// <summary>
             /// Resource type, 1 for icons.
             /// </summary>
-            public UInt16 wType;
+            internal UInt16 wType;
             /// <summary>
             /// Number of images.
             /// </summary>
-            public UInt16 wImageCount;
+            internal UInt16 wImageCount;
         }
 
         /// <summary>
@@ -163,102 +163,102 @@ namespace Vestris.ResourceLib
         /// See http://msdn.microsoft.com/en-us/library/ms997538.aspx for more information.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct GRPICONDIRENTRY
+        internal struct GRPICONDIRENTRY
         {
             /// <summary>
             /// Width.
             /// </summary>
-            public Byte bWidth;
+            internal Byte bWidth;
             /// <summary>
             /// Height.
             /// </summary>
-            public Byte bHeight;
+            internal Byte bHeight;
             /// <summary>
             /// Colors; 0 means 256 or more.
             /// </summary>
-            public Byte bColors;
+            internal Byte bColors;
             /// <summary>
             /// Reserved.
             /// </summary>
-            public Byte bReserved;
+            internal Byte bReserved;
             /// <summary>
             /// Number of bitmap planes.
             /// </summary>
-            public UInt16 wPlanes;
+            internal UInt16 wPlanes;
             /// <summary>
             /// Bits per pixel.
             /// </summary>
-            public UInt16 wBitsPerPixel;
+            internal UInt16 wBitsPerPixel;
             /// <summary>
             /// Image size in bytes.
             /// </summary>
-            public UInt32 dwImageSize;
+            internal UInt32 dwImageSize;
             /// <summary>
             /// Icon ID.
             /// </summary>
-            public UInt16 nID;
+            internal UInt16 nID;
         }
 
         /// <summary>
         /// Hardware-independent icon directory entry in an .ico file.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct FILEGRPICONDIRENTRY
+        internal struct FILEGRPICONDIRENTRY
         {
             /// <summary>
             /// Icon width.
             /// </summary>
-            public Byte bWidth;
+            internal Byte bWidth;
             /// <summary>
             /// Icon height.
             /// </summary>
-            public Byte bHeight;
+            internal Byte bHeight;
             /// <summary>
             /// Colors; 0 means 256 or more.
             /// </summary>
-            public Byte bColors;
+            internal Byte bColors;
             /// <summary>
             /// Reserved.
             /// </summary>
-            public Byte bReserved;
+            internal Byte bReserved;
             /// <summary>
             /// Number of bitmap planes for icons.
             /// Horizontal hotspot for cursors.
             /// </summary>
-            public UInt16 wPlanes;
+            internal UInt16 wPlanes;
             /// <summary>
             /// Bits per pixel for icons.
             /// Vertical hostpot for cursors.
             /// </summary>
-            public UInt16 wBitsPerPixel;
+            internal UInt16 wBitsPerPixel;
             /// <summary>
             /// Image size in bytes.
             /// </summary>
-            public UInt32 dwImageSize;
+            internal UInt32 dwImageSize;
             /// <summary>
             /// Offset of bitmap data from the beginning of the file.
             /// </summary>
-            public UInt32 dwFileOffset;
+            internal UInt32 dwFileOffset;
         }
 
         /// <summary>
         /// Hardware-independent icon structure in an .ico file.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct FILEGRPICONDIR
+        internal struct FILEGRPICONDIR
         {
             /// <summary>
             /// Reserved, must be zero.
             /// </summary>
-            public UInt16 wReserved;
+            internal UInt16 wReserved;
             /// <summary>
             /// Resource Type (1 for icons).
             /// </summary>
-            public UInt16 wType;
+            internal UInt16 wType;
             /// <summary>
             /// Number of images.
             /// </summary>
-            public UInt16 wCount;
+            internal UInt16 wCount;
         }
 
         /// <summary>
@@ -300,7 +300,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Predefined resource types.
         /// </summary>
-        public enum ResourceTypes
+        internal enum ResourceTypes
         {
             /// <summary>
             /// Hardware-dependent cursor resource.
@@ -534,20 +534,20 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Neutral primary language ID.
         /// </summary>
-        public const UInt16 LANG_NEUTRAL = 0;
+        internal const UInt16 LANG_NEUTRAL = 0;
         /// <summary>
         /// US-English primary language ID.
         /// </summary>
-        public const UInt16 LANG_ENGLISH = 9;
+        internal const UInt16 LANG_ENGLISH = 9;
 
         /// <summary>
         /// Neutral sublanguage ID.
         /// </summary>
-        public const UInt16 SUBLANG_NEUTRAL = 0;
+        internal const UInt16 SUBLANG_NEUTRAL = 0;
         /// <summary>
         /// US-English sublanguage ID.
         /// </summary>
-        public const UInt16 SUBLANG_ENGLISH_US = 1;
+        internal const UInt16 SUBLANG_ENGLISH_US = 1;
 
         /// <summary>
         /// CREATEPROCESS_MANIFEST_RESOURCE_ID is used primarily for EXEs. If an executable has a resource of type RT_MANIFEST, 
@@ -557,7 +557,7 @@ namespace Vestris.ResourceLib
         /// a resource of type RT_MANIFEST, ID CREATEPROCESS_MANIFEST_RESOURCE_ID, Windows will use that manifest as the 
         /// dependency. 
         /// </summary>
-        public const UInt16 CREATEPROCESS_MANIFEST_RESOURCE_ID  = 1;
+        internal const UInt16 CREATEPROCESS_MANIFEST_RESOURCE_ID  = 1;
         /// <summary>
         /// ISOLATIONAWARE_MANIFEST_RESOURCE_ID is used primarily for DLLs. It should be used if the dll wants private 
         /// dependencies other than the process default. For example, if an dll depends on comctl32.dll version 6.0.0.0. 
@@ -565,16 +565,16 @@ namespace Vestris.ResourceLib
         /// version 6.0.0.0, so that even if the process executable wants comctl32.dll version 5.1, the dll itself will still 
         /// use the right version of comctl32.dll. 
         /// </summary>
-        public const UInt16 ISOLATIONAWARE_MANIFEST_RESOURCE_ID = 2;
+        internal const UInt16 ISOLATIONAWARE_MANIFEST_RESOURCE_ID = 2;
         /// <summary>
         /// When ISOLATION_AWARE_ENABLED is defined, Windows re-defines certain APIs. For example LoadLibraryExW 
         /// is redefined to IsolationAwareLoadLibraryExW. 
         /// </summary>
-        public const UInt16 ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID = 3;
+        internal const UInt16 ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID = 3;
         /// <summary>
         /// Resource manifest type.
         /// </summary>
-        public enum ManifestType
+        internal enum ManifestType
         {
             /// <summary>
             /// CREATEPROCESS_MANIFEST_RESOURCE_ID

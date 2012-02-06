@@ -9,7 +9,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// Resource utilities.
     /// </summary>
-    public abstract class ResourceUtil
+    internal abstract class ResourceUtil
     {
         /// <summary>
         /// Align an address to a 4-byte boundary.
@@ -120,7 +120,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Neutral language ID.
         /// </summary>
-        public static UInt16 NEUTRALLANGID
+        internal static UInt16 NEUTRALLANGID
         {
             get
             {
@@ -131,7 +131,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// US-English language ID.
         /// </summary>
-        public static UInt16 USENGLISHLANGID
+        internal static UInt16 USENGLISHLANGID
         {
             get
             {
@@ -145,7 +145,7 @@ namespace Vestris.ResourceLib
         /// <param name="primary">Primary language ID.</param>
         /// <param name="sub">Sublanguage ID.</param>
         /// <returns>Microsoft language ID.</returns>
-        public static UInt16 MAKELANGID(int primary, int sub)
+        internal static UInt16 MAKELANGID(int primary, int sub)
         {
             return (UInt16) ((((UInt16)sub) << 10) | ((UInt16)primary));
         }
@@ -155,7 +155,7 @@ namespace Vestris.ResourceLib
         /// </summary>
         /// <param name="lcid">Microsoft language ID</param>
         /// <returns>primary language ID (low-order 10 bits)</returns>
-        public static UInt16 PRIMARYLANGID(UInt16 lcid)
+        internal static UInt16 PRIMARYLANGID(UInt16 lcid)
         {
             return (UInt16) (((UInt16)lcid) & 0x3ff);
         }
@@ -165,7 +165,7 @@ namespace Vestris.ResourceLib
         /// </summary>
         /// <param name="lcid">Microsoft language ID.</param>
         /// <returns>Sublanguage ID (high-order 6 bits).</returns>
-        public static UInt16 SUBLANGID(UInt16 lcid)
+        internal static UInt16 SUBLANGID(UInt16 lcid)
         {
             return (UInt16) (((UInt16)lcid) >> 10);
         }

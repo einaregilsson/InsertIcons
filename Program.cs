@@ -6,7 +6,7 @@ using Vestris.ResourceLib;
 using System.Reflection;
 using System.IO;
 
-namespace ResourceIcons
+namespace EinarEgilsson.Utilities.Win32Icons
 {
     class Program
     {

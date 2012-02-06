@@ -6,7 +6,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// User32.dll functions.
     /// </summary>
-    public abstract class User32
+    internal abstract class User32
     {
         /// <summary>
         /// Contains information about an icon or a cursor. 
@@ -18,25 +18,25 @@ namespace Vestris.ResourceLib
             /// Specifies whether this structure defines an icon or a cursor. 
             /// A value of TRUE specifies an icon; FALSE specifies a cursor. 
             /// </summary>
-            public bool IsIcon;
+            internal bool IsIcon;
             /// <summary>
             /// Specifies the x-coordinate of a cursor's hot spot. If this structure defines an icon, the hot spot is 
             /// always in the center of the icon, and this member is ignored.
             /// </summary>
-            public int xHotspot;
+            internal int xHotspot;
             /// <summary>
             /// Specifies the y-coordinate of the cursor's hot spot. If this structure defines an icon, the hot spot 
             /// is always in the center of the icon, and this member is ignored.
             /// </summary>
-            public int yHotspot;
+            internal int yHotspot;
             /// <summary>
             /// Specifies the icon bitmask bitmap. 
             /// </summary>
-            public IntPtr MaskBitmap;
+            internal IntPtr MaskBitmap;
             /// <summary>
             /// Handle to the icon color bitmap.
             /// </summary>
-            public IntPtr ColorBitmap;
+            internal IntPtr ColorBitmap;
         }
 
         /// <summary>
@@ -91,72 +91,72 @@ namespace Vestris.ResourceLib
         /// the number of subsequent DIALOGITEMTEMPLATE structures in the template.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct DIALOGTEMPLATE
+        internal struct DIALOGTEMPLATE
         {
             /// <summary>
             /// Specifies the style of the dialog box.
             /// </summary>
-            public UInt32 style;
+            internal UInt32 style;
             /// <summary>
             /// Extended styles for a window.
             /// </summary>
-            public UInt32 dwExtendedStyle;
+            internal UInt32 dwExtendedStyle;
             /// <summary>
             /// Specifies the number of items in the dialog box. 
             /// </summary>
-            public UInt16 cdit;
+            internal UInt16 cdit;
             /// <summary>
             /// Specifies the x-coordinate, in dialog box units, of the upper-left corner of the dialog box. 
             /// </summary>
-            public Int16 x;
+            internal Int16 x;
             /// <summary>
             /// Specifies the y-coordinate, in dialog box units, of the upper-left corner of the dialog box.
             /// </summary>
-            public Int16 y;
+            internal Int16 y;
             /// <summary>
             /// Specifies the width, in dialog box units, of the dialog box.
             /// </summary>
-            public Int16 cx;
+            internal Int16 cx;
             /// <summary>
             /// Specifies the height, in dialog box units, of the dialog box.
             /// </summary>
-            public Int16 cy;
+            internal Int16 cy;
         }
 
         /// <summary>
         /// The DIALOGITEMTEMPLATE structure defines the dimensions and style of a control in a dialog box.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct DIALOGITEMTEMPLATE
+        internal struct DIALOGITEMTEMPLATE
         {
             /// <summary>
             /// Specifies the style of the control.
             /// </summary>
-            public UInt32 style;
+            internal UInt32 style;
             /// <summary>
             /// Extended styles for a window.
             /// </summary>
-            public UInt32 dwExtendedStyle;
+            internal UInt32 dwExtendedStyle;
             /// <summary>
             /// Specifies the x-coordinate, in dialog box units, of the upper-left corner of the control. 
             /// </summary>
-            public Int16 x;
+            internal Int16 x;
             /// <summary>
             /// Specifies the y-coordinate, in dialog box units, of the upper-left corner of the control.
             /// </summary>
-            public Int16 y;
+            internal Int16 y;
             /// <summary>
             /// Specifies the width, in dialog box units, of the control.
             /// </summary>
-            public Int16 cx;
+            internal Int16 cx;
             /// <summary>
             /// Specifies the height, in dialog box units, of the control.
             /// </summary>
-            public Int16 cy;
+            internal Int16 cy;
             /// <summary>
             /// Specifies the control identifier.
             /// </summary>
-            public Int16 id;
+            internal Int16 id;
         }
 
         /// <summary>
@@ -166,99 +166,99 @@ namespace Vestris.ResourceLib
         /// uses the DIALOGEXITEMTEMPLATE format to describe the control. 
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct DIALOGEXTEMPLATE
+        internal struct DIALOGEXTEMPLATE
         {
             /// <summary>
             /// Specifies the version number of the extended dialog box template. This member must be 1.
             /// </summary>
-            public UInt16 dlgVer;
+            internal UInt16 dlgVer;
             /// <summary>
             /// Indicates whether a template is an extended dialog box template. 
             /// </summary>
-            public UInt16 signature;
+            internal UInt16 signature;
             /// <summary>
             /// Specifies the help context identifier for the dialog box window. When the system
             /// sends a WM_HELP message, it passes this value in the wContextId member of the 
             /// HELPINFO structure. 
             /// </summary>
-            public UInt32 helpID;
+            internal UInt32 helpID;
             /// <summary>
             /// Specifies extended windows styles.
             /// </summary>
-            public UInt32 exStyle;
+            internal UInt32 exStyle;
             /// <summary>
             /// Specifies the style of the dialog box.
             /// </summary>
-            public UInt32 style;
+            internal UInt32 style;
             /// <summary>
             /// Specifies the number of controls in the dialog box.
             /// </summary>
-            public UInt16 cDlgItems;
+            internal UInt16 cDlgItems;
             /// <summary>
             /// Specifies the x-coordinate, in dialog box units, of the upper-left corner of the dialog box.
             /// </summary>
-            public Int16 x;
+            internal Int16 x;
             /// <summary>
             /// Specifies the y-coordinate, in dialog box units, of the upper-left corner of the dialog box.
             /// </summary>
-            public Int16 y;
+            internal Int16 y;
             /// <summary>
             /// Specifies the width, in dialog box units, of the dialog box.
             /// </summary>
-            public Int16 cx;
+            internal Int16 cx;
             /// <summary>
             /// Specifies the height, in dialog box units, of the dialog box.
             /// </summary>
-            public Int16 cy;
+            internal Int16 cy;
         }
 
         /// <summary>
         /// A control entry in an extended dialog template.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 4)]
-        public struct DIALOGEXITEMTEMPLATE
+        internal struct DIALOGEXITEMTEMPLATE
         {
             /// <summary>
             /// Specifies the help context identifier for the dialog box window. When the system
             /// sends a WM_HELP message, it passes this value in the wContextId member of the 
             /// HELPINFO structure. 
             /// </summary>
-            public UInt32 helpID;
+            internal UInt32 helpID;
             /// <summary>
             /// Specifies extended windows styles.
             /// </summary>
-            public UInt32 exStyle;
+            internal UInt32 exStyle;
             /// <summary>
             /// Specifies the style of the dialog box.
             /// </summary>
-            public UInt32 style;
+            internal UInt32 style;
             /// <summary>
             /// Specifies the x-coordinate, in dialog box units, of the upper-left corner of the dialog box.
             /// </summary>
-            public Int16 x;
+            internal Int16 x;
             /// <summary>
             /// Specifies the y-coordinate, in dialog box units, of the upper-left corner of the dialog box.
             /// </summary>
-            public Int16 y;
+            internal Int16 y;
             /// <summary>
             /// Specifies the width, in dialog box units, of the dialog box.
             /// </summary>
-            public Int16 cx;
+            internal Int16 cx;
             /// <summary>
             /// Specifies the height, in dialog box units, of the dialog box.
             /// </summary>
-            public Int16 cy;
+            internal Int16 cy;
             /// <summary>
             /// Specifies the control identifier.
             /// </summary>
-            public Int32 id;
+            internal Int32 id;
         }
 
         /// <summary>
         /// Window styles.
         /// http://msdn.microsoft.com/en-us/library/ms632600(VS.85).aspx
         /// </summary>
-        public enum WindowStyles : uint
+        internal enum WindowStyles : uint
         {
             /// <summary>
             /// Creates an overlapped window. An overlapped window has a title bar and 
@@ -372,7 +372,7 @@ namespace Vestris.ResourceLib
         /// Dialog styles.
         /// http://msdn.microsoft.com/en-us/library/ms644994(VS.85).aspx
         /// </summary>
-        public enum DialogStyles : uint
+        internal enum DialogStyles : uint
         {
             /// <summary>
             /// Specifying this style in the dialog template tells Windows that the dtX and dtY values
@@ -464,7 +464,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Extended dialog styles.
         /// </summary>
-        public enum ExtendedDialogStyles : uint
+        internal enum ExtendedDialogStyles : uint
         {
             /// <summary>
             /// Creates a window that has a double border; the window can, optionally, be created 
@@ -609,7 +609,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Possible DIALOGEXITEMTEMPLATE WindowClass ordinals.
         /// </summary>
-        public enum DialogItemClass : uint
+        internal enum DialogItemClass : uint
         {
             /// <summary>
             /// A button.
@@ -643,7 +643,7 @@ namespace Vestris.ResourceLib
         /// and a combination of the following static control styles.
         /// http://msdn.microsoft.com/en-us/library/bb760773(VS.85).aspx
         /// </summary>
-        public enum StaticControlStyles : uint
+        internal enum StaticControlStyles : uint
         {
             /// <summary>
             /// Specifies a simple rectangle and left-aligns the text in the rectangle. 
@@ -842,7 +842,7 @@ namespace Vestris.ResourceLib
         /// Push button styles.
         /// http://msdn.microsoft.com/en-us/library/bb775951(VS.85).aspx
         /// </summary>
-        public enum ButtonControlStyles : uint
+        internal enum ButtonControlStyles : uint
         {
             /// <summary>
             /// Creates a push button that posts a WM_COMMAND message to the owner window when the
@@ -1014,7 +1014,7 @@ namespace Vestris.ResourceLib
         /// Edit control styles.
         /// http://msdn.microsoft.com/en-us/library/bb775464(VS.85).aspx
         /// </summary>
-        public enum EditControlStyles : uint
+        internal enum EditControlStyles : uint
         {
             /// <summary>
             /// Aligns text with the left margin.
@@ -1094,81 +1094,81 @@ namespace Vestris.ResourceLib
             /// <summary>
             /// Specifies the version number. This member must be zero. 
             /// </summary>
-            public UInt16 wVersion;
+            internal UInt16 wVersion;
             /// <summary>
             /// Specifies the offset, in bytes, from the end of the header. 
             /// The menu item list begins at this offset. Usually, this member is zero, and the menu 
             /// item list follows immediately after the header. 
             /// </summary>
-            public UInt16 wOffset;
+            internal UInt16 wOffset;
         }
 
         /// <summary>
         /// Defines a menu item in a menu template.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct MENUITEMTEMPLATE
+        internal struct MENUITEMTEMPLATE
         {
             /// <summary>
             /// Specifies one or more of the following predefined menu options that control the appearance of the menu item.
             /// </summary>
-            public UInt16 mtOption;
+            internal UInt16 mtOption;
         }
 
         /// <summary>
         /// Defines the header for an extended menu template.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct MENUEXTEMPLATE
+        internal struct MENUEXTEMPLATE
         {
             /// <summary>
             /// Template version number. This member must be 1 for extended menu templates.
             /// </summary>
-            public UInt16 wVersion;
+            internal UInt16 wVersion;
             /// <summary>
             /// Offset of the first MENUEXITEMTEMPLATE structure, relative to the end of 
             /// this structure member. If the first item definition immediately follows the 
             /// dwHelpId member, this member should be 4. 
             /// </summary>
-            public UInt16 wOffset;
+            internal UInt16 wOffset;
             /// <summary>
             /// Help identifier of menu bar.
             /// </summary>
-            public UInt32 dwHelpId;
+            internal UInt32 dwHelpId;
         }
 
         /// <summary>
         /// Drop-down menu or submenu item.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct MENUEXITEMTEMPLATE
+        internal struct MENUEXITEMTEMPLATE
         {
             /// <summary>
             /// Menu item type. This member can be a combination of the type (beginning with MFT) values 
             /// listed with the MENUITEMINFO structure. 
             /// </summary>
-            public UInt32 dwType;
+            internal UInt32 dwType;
             /// <summary>
             /// Menu item state. This member can be a combination of the state (beginning with MFS) values 
             /// listed with the MENUITEMINFO structure. 
             /// </summary>
-            public UInt32 dwState;
+            internal UInt32 dwState;
             /// <summary>
             /// Menu item identifier. This is an application-defined value that identifies the menu item. 
             /// </summary>
-            public UInt32 dwMenuId;
+            internal UInt32 dwMenuId;
             /// <summary>
             /// Value specifying whether the menu item is the last item in the menu bar, drop-down menu, 
             /// submenu, or shortcut menu and whether it is an item that opens a drop-down menu or submenu.
             /// </summary>
-            public UInt16 dwOptions;
+            internal UInt16 dwOptions;
         }
 
         /// <summary>
         /// Specifies one or more of the following predefined menu options that control the 
         /// appearance of the menu item.
         /// </summary>
-        public enum MenuFlags : uint
+        internal enum MenuFlags : uint
         {
             /// <summary>
             /// 
@@ -1361,7 +1361,7 @@ namespace Vestris.ResourceLib
         /// menu and whether it is an item that opens a drop-down menu or submenu. This member can be zero or more 
         /// of these values.
         /// </summary>
-        public enum MenuResourceType
+        internal enum MenuResourceType
         {
             /// <summary>
             /// Defines the last menu item in the menu bar, drop-down menu, submenu, or shortcut menu.
@@ -1379,26 +1379,26 @@ namespace Vestris.ResourceLib
         /// http://msdn.microsoft.com/en-us/library/ms646340(VS.85).aspx
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        public struct ACCEL
+        internal struct ACCEL
         {
             /// <summary>
             /// Accelerator flags.
             /// </summary>
-            public UInt16 fVirt;
+            internal UInt16 fVirt;
             /// <summary>
             /// Accelerator key. This member can be either a virtual-key code or an ASCII character code. 
             /// </summary>
-            public UInt16 key;
+            internal UInt16 key;
             /// <summary>
             /// Accelerator identifier.
             /// </summary>
-            public UInt32 cmd;
+            internal UInt32 cmd;
         }
 
         /// <summary>
         /// Flags, fVirt field of the Accelerator table structure.
         /// </summary>
-        public enum AcceleratorVirtualKey : uint
+        internal enum AcceleratorVirtualKey : uint
         {
             /// <summary>
             /// Virtual key.
@@ -1431,7 +1431,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Virtual key definitions.
         /// </summary>
-        public enum VirtualKeys : uint
+        internal enum VirtualKeys : uint
         {
             /// <summary>
             /// Standard virtual left mouse button.
@@ -2067,131 +2067,131 @@ namespace Vestris.ResourceLib
         /// Contains information about an individual font in a font resource group. 
         /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
-        public struct FONTDIRENTRY
+        internal struct FONTDIRENTRY
         {
             /// <summary>
             /// Specifies a user-defined version number for the resource data that tools can 
             /// use to read and write resource files. 
             /// </summary>
-            public UInt16 dfVersion;
+            internal UInt16 dfVersion;
             /// <summary>
             /// Specifies the size of the file, in bytes. 
             /// </summary>
-            public UInt32 dfSize;
+            internal UInt32 dfSize;
             /// <summary>
             /// Contains a 60-character string with the font supplier's copyright information.
             /// </summary>
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 60)]
-            public string dfCopyright;
+            internal string dfCopyright;
             /// <summary>
             /// Specifies the type of font file.
             /// </summary>
-            public UInt16 dfType;
+            internal UInt16 dfType;
             /// <summary>
             /// Specifies the point size at which this character set looks best. 
             /// </summary>
-            public UInt16 dfPoints;
+            internal UInt16 dfPoints;
             /// <summary>
             /// Specifies the vertical resolution, in dots per inch, at which this character set was digitized.
             /// </summary>
-            public UInt16 dfVertRes;
+            internal UInt16 dfVertRes;
             /// <summary>
             /// Specifies the horizontal resolution, in dots per inch, at which this character set was digitized.
             /// </summary>
-            public UInt16 dfHorizRes;
+            internal UInt16 dfHorizRes;
             /// <summary>
             /// Specifies the distance from the top of a character definition cell to the baseline of the 
             /// typographical font. 
             /// </summary>
-            public UInt16 dfAscent;
+            internal UInt16 dfAscent;
             /// <summary>
             /// Specifies the amount of leading inside the bounds set by the dfPixHeight member. Accent marks and 
             /// other diacritical characters can occur in this area. 
             /// </summary>
-            public UInt16 dfInternalLeading;
+            internal UInt16 dfInternalLeading;
             /// <summary>
             /// Specifies the amount of extra leading that the application adds between rows. 
             /// </summary>
-            public UInt16 dfExternalLeading;
+            internal UInt16 dfExternalLeading;
             /// <summary>
             /// Specifies an italic font if not equal to zero.
             /// </summary>
-            public byte dfItalic;
+            internal byte dfItalic;
             /// <summary>
             /// Specifies an underlined font if not equal to zero.
             /// </summary>
-            public byte dfUnderline;
+            internal byte dfUnderline;
             /// <summary>
             /// Specifies a strikeout font if not equal to zero.
             /// </summary>
-            public byte dfStrikeOut;
+            internal byte dfStrikeOut;
             /// <summary>
             /// Specifies the weight of the font in the range 0 through 1000. For example, 400 is roman and 
             /// 700 is bold. If this value is zero, a default weight is used.
             /// </summary>
-            public UInt16 dfWeight;
+            internal UInt16 dfWeight;
             /// <summary>
             /// Specifies the character set of the font.
             /// </summary>
-            public byte dfCharSet;
+            internal byte dfCharSet;
             /// <summary>
             /// Specifies the width of the grid on which a vector font was digitized. For raster fonts, 
             /// if the member is not equal to zero, it represents the width for all the characters in the 
             /// bitmap. If the member is equal to zero, the font has variable-width characters. 
             /// </summary>
-            public UInt16 dfPixWidth;
+            internal UInt16 dfPixWidth;
             /// <summary>
             /// Specifies the height of the character bitmap for raster fonts or the height of the grid 
             /// on which a vector font was digitized. 
             /// </summary>
-            public UInt16 dfPixHeight;
+            internal UInt16 dfPixHeight;
             /// <summary>
             /// Specifies the pitch and the family of the font.
             /// </summary>
-            public byte dfPitchAndFamily;
+            internal byte dfPitchAndFamily;
             /// <summary>
             /// Specifies the average width of characters in the font (generally defined as the width of 
             /// the letter x). This value does not include the overhang required for bold or italic characters. 
             /// </summary>
-            public UInt16 dfAvgWidth;
+            internal UInt16 dfAvgWidth;
             /// <summary>
             /// Specifies the width of the widest character in the font.
             /// </summary>
-            public UInt16 dfMaxWidth;
+            internal UInt16 dfMaxWidth;
             /// <summary>
             /// Specifies the first character code defined in the font.
             /// </summary>
-            public byte dfFirstChar;
+            internal byte dfFirstChar;
             /// <summary>
             /// Specifies the last character code defined in the font.
             /// </summary>
-            public byte dfLastChar;
+            internal byte dfLastChar;
             /// <summary>
             /// Specifies the character to substitute for characters not in the font.
             /// </summary>
-            public byte dfDefaultChar;
+            internal byte dfDefaultChar;
             /// <summary>
             /// Specifies the character that will be used to define word breaks for text justification.
             /// </summary>
-            public byte dfBreakChar;
+            internal byte dfBreakChar;
             /// <summary>
             /// Specifies the number of bytes in each row of the bitmap. This value is always even so 
             /// that the rows start on word boundaries. For vector fonts, this member has no meaning. 
             /// </summary>
-            public UInt16 dfWidthBytes;
+            internal UInt16 dfWidthBytes;
             /// <summary>
             /// Specifies the offset in the file to a null-terminated string that specifies a device name. 
             /// For a generic font, this value is zero. 
             /// </summary>
-            public UInt32 dfDevice;
+            internal UInt32 dfDevice;
             /// <summary>
             /// Specifies the offset in the file to a null-terminated string that names the typeface. 
             /// </summary>
-            public UInt32 dfFace;
+            internal UInt32 dfFace;
             /// <summary>
             /// This member is reserved.
             /// </summary>
-            public UInt32 dfReserved;
+            internal UInt32 dfReserved;
         };
     }
 }

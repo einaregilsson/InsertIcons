@@ -9,7 +9,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// A generic resource.
     /// </summary>
-    public class GenericResource : Resource
+    internal class GenericResource : Resource
     {
         /// <summary>
         /// Raw resource data.
@@ -19,7 +19,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Raw resource data.
         /// </summary>
-        public byte[] Data
+        internal byte[] Data
         {
             get
             {
@@ -40,7 +40,7 @@ namespace Vestris.ResourceLib
         /// <param name="name">Resource name.</param>
         /// <param name="language">Language id.</param>
         /// <param name="size">Resource size.</param>
-        public GenericResource(IntPtr hModule, IntPtr hResource, ResourceId type, ResourceId name, UInt16 language, int size)
+        internal GenericResource(IntPtr hModule, IntPtr hResource, ResourceId type, ResourceId name, UInt16 language, int size)
             : base(hModule, hResource, type, name, language, size)
         {
 
@@ -52,7 +52,7 @@ namespace Vestris.ResourceLib
         /// <param name="name">Resource name.</param>
         /// <param name="type">Resource type.</param>
         /// <param name="language">Resource language.</param>
-        public GenericResource(ResourceId type, ResourceId name, UInt16 language)
+        internal GenericResource(ResourceId type, ResourceId name, UInt16 language)
         {
             _type = type;
             _name = name;

@@ -10,7 +10,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// This structure depicts the organization of data in a hardware-independent icon resource.
     /// </summary>
-    public class DirectoryResource<ImageResourceType> : Resource
+    internal class DirectoryResource<ImageResourceType> : Resource
         where ImageResourceType : IconImageResource, new()
     {
         Kernel32.GRPICONDIR _header = new Kernel32.GRPICONDIR();
@@ -19,7 +19,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Returns the type of the resource in this group.
         /// </summary>
-        public Kernel32.ResourceTypes ResourceType
+        internal Kernel32.ResourceTypes ResourceType
         {
             get
             {
@@ -38,7 +38,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Icons contained in this hardware-independent icon resource.
         /// </summary>
-        public List<ImageResourceType> Icons
+        internal List<ImageResourceType> Icons
         {
             get
             {
@@ -68,7 +68,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// A new hardware-independent icon resource.
         /// </summary>
-        public DirectoryResource(Kernel32.ResourceTypes resourceType)
+        internal DirectoryResource(Kernel32.ResourceTypes resourceType)
             : base(IntPtr.Zero,
                 IntPtr.Zero,
                 new ResourceId(resourceType),
@@ -93,7 +93,7 @@ namespace Vestris.ResourceLib
         /// Save a hardware-independent icon resource to an executable file.
         /// </summary>
         /// <param name="filename">Name of an executable file (.exe or .dll).</param>
-        public override void SaveTo(string filename)
+        internal override void SaveTo(string filename)
         {
             base.SaveTo(filename);
 

@@ -11,7 +11,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// This structure depicts the organization of icon data in a .ico file.
     /// </summary>
-    public class IconFileIcon 
+    internal class IconFileIcon 
     {
         private Kernel32.FILEGRPICONDIRENTRY _header;
         private DeviceIndependentBitmap _image = new DeviceIndependentBitmap();
@@ -19,7 +19,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Icon header.
         /// </summary>
-        public Kernel32.FILEGRPICONDIRENTRY Header
+        internal Kernel32.FILEGRPICONDIRENTRY Header
         {
             get
             {
@@ -30,7 +30,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Icon bitmap.
         /// </summary>
-        public DeviceIndependentBitmap Image
+        internal DeviceIndependentBitmap Image
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// New icon data.
         /// </summary>
-        public IconFileIcon()
+        internal IconFileIcon()
         {
 
         }
@@ -53,7 +53,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Icon width.
         /// </summary>
-        public Byte Width
+        internal Byte Width
         {
             get
             {
@@ -64,7 +64,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Icon height.
         /// </summary>
-        public Byte Height
+        internal Byte Height
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Image size in bytes.
         /// </summary>
-        public UInt32 ImageSize
+        internal UInt32 ImageSize
         {
             get
             {

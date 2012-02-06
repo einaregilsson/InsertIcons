@@ -11,7 +11,7 @@ namespace Vestris.ResourceLib
     /// <summary>
     /// A device-independent image.
     /// </summary>
-    public class DeviceIndependentBitmap
+    internal class DeviceIndependentBitmap
     {
         private Gdi32.BITMAPINFOHEADER _header = new Gdi32.BITMAPINFOHEADER();
         private byte[] _data = null;
@@ -22,7 +22,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Raw image data.
         /// </summary>
-        public byte[] Data
+        internal byte[] Data
         {
             get
             {
@@ -49,7 +49,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Bitmap info header.
         /// </summary>
-        public Gdi32.BITMAPINFOHEADER Header
+        internal Gdi32.BITMAPINFOHEADER Header
         {
             get
             {
@@ -60,7 +60,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Bitmap size in bytes.
         /// </summary>
-        public int Size
+        internal int Size
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// A new icon image.
         /// </summary>
-        public DeviceIndependentBitmap()
+        internal DeviceIndependentBitmap()
         {
 
         }
@@ -80,7 +80,7 @@ namespace Vestris.ResourceLib
         /// A device-independent bitmap.
         /// </summary>
         /// <param name="data">Bitmap data.</param>
-        public DeviceIndependentBitmap(byte[] data)
+        internal DeviceIndependentBitmap(byte[] data)
         {
             Data = data;
         }
@@ -89,7 +89,7 @@ namespace Vestris.ResourceLib
         /// Create a copy of an image.
         /// </summary>
         /// <param name="image">Source image.</param>
-        public DeviceIndependentBitmap(DeviceIndependentBitmap image)
+        internal DeviceIndependentBitmap(DeviceIndependentBitmap image)
         {
             _data = new byte[image._data.Length];
             Buffer.BlockCopy(image._data, 0, _data, 0, image._data.Length);
@@ -180,7 +180,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Bitmap monochrome mask.
         /// </summary>
-        public Bitmap Mask
+        internal Bitmap Mask
         {
             get
             {
@@ -254,7 +254,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Bitmap color (XOR) part of the image.
         /// </summary>
-        public Bitmap Color
+        internal Bitmap Color
         {
             get
             {
@@ -320,7 +320,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Complete image.
         /// </summary>
-        public Bitmap Image
+        internal Bitmap Image
         {
             get
             {
