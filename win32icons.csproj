@@ -73,6 +73,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ResourceLib\User32.cs" />
+    <Compile Include="WinIconAssembly.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ResourceLib\License.txt" />
