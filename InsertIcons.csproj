@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D6033991-9D86-42AB-92F9-BB510733E464}</ProjectGuid>
+    <ProjectGuid>{C037D608-57FD-4ACD-AAC1-BFAD1767B11B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>win32icons.test</RootNamespace>
-    <AssemblyName>test</AssemblyName>
+    <RootNamespace>EinarEgilsson.Utilities.InsertIcons</RootNamespace>
+    <AssemblyName>win32icons</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -33,16 +33,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>sec.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <Win32Resource>
-    </Win32Resource>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +47,30 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceLib\DeviceIndependentBitmap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ResourceLib\DirectoryResource.cs" />
+    <Compile Include="ResourceLib\Gdi32.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ResourceLib\IconDirectoryResource.cs" />
+    <Compile Include="ResourceLib\IconFile.cs" />
+    <Compile Include="ResourceLib\IconFileIcon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ResourceLib\IconImageResource.cs" />
+    <Compile Include="ResourceLib\IconResource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ResourceLib\Kernel32.cs" />
+    <Compile Include="ResourceLib\Resource.cs" />
+    <Compile Include="ResourceLib\ResourceId.cs" />
+    <Compile Include="ResourceLib\ResourceInfo.cs" />
+    <Compile Include="ResourceLib\ResourceUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ResourceLib\User32.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons\cmd.ico">
@@ -60,10 +79,7 @@
     <Content Include="icons\sec.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sec.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="test.res" />
+    <Content Include="ResourceLib\License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

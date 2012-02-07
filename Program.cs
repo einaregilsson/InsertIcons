@@ -8,40 +8,53 @@ using System.IO;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 
-namespace EinarEgilsson.Utilities.Win32Icons
+namespace EinarEgilsson.Utilities.InsertIcons
 {
     class Program
     {
         static int Main(string[] args)
         {
-
-
-            return new Program().Run(args);
-        }
-        public int Run(string[] args)
-        {
-            Compose();
-            if (args.Length == 0)
+            if (args.Length < 2)
             {
                 PrintUsage();
-                return 0;
-            }
-
-            ICommand cmd = Commands.FirstOrDefault(c => c.Name == args[0]);
-            if (cmd == null)
-            {
-                Console.Error.WriteLine("error: Unknown command: {0}. Type win32icons help for more information", args[0]);
-                return 1;
-            }
-
-            if (args.Length == 1)
-            {
-                Console.WriteLine("error: Missing filename argument. Type win32icons help for more information");
                 return 1;
             }
             try
             {
-                cmd.Execute(args[1], args.Skip(2).ToArray());
+                string assembly = args[0];
+                string[] iconFiles = args.Skip(1).ToArray();
+                ushort iconMaxId = 0;
+                int groupIconMaxId = 0;
+                using (var info = new ResourceInfo())
+                {
+                    info.Load(assembly);
+
+                    ResourceId groupIconId = new ResourceId(Kernel32.ResourceTypes.RT_GROUP_ICON);
+                    if (info.Resources.ContainsKey(groupIconId))
+                    {
+                        iconMaxId = info.Resources[groupIconId].OfType<IconDirectoryResource>().Max(idr => idr.Icons.Max(icon => icon.Id));
+                        groupIconMaxId = info.Resources[groupIconId].OfType<IconDirectoryResource>().Max(ir => (int)ir.Name.Id);
+                        foreach (IconDirectoryResource r in info.Resources[groupIconId])
+                        {
+                            IntPtr s = r.Name.Id;
+                        }
+                    }
+
+                }
+
+                foreach (string icoFile in iconFiles)
+                {
+                    IconDirectoryResource newIcon = new IconDirectoryResource(new IconFile(icoFile));
+                    groupIconMaxId++;
+                    newIcon.Name.Id = (IntPtr)groupIconMaxId;
+                    newIcon.Name.Name = newIcon.Name.Id.ToString();
+
+                    foreach (var icon in newIcon.Icons)
+                    {
+                        icon.Id = ++iconMaxId;
+                    }
+                    newIcon.SaveTo(assembly);
+                }
                 return 0;
             }
             catch (Exception ex)
@@ -51,24 +64,17 @@ namespace EinarEgilsson.Utilities.Win32Icons
             }
         }
 
-        [ImportMany]
-        private List<ICommand> Commands { get; set; }
-
-        private void PrintUsage()
+        private static void PrintUsage()
         {
             Console.WriteLine(@"
-Usage: win32icons <command> <filename> [arg1, arg2, ..., argn]
+Usage: InsertIcons <assemblyfile> [iconfile1 iconfile2 ...]
 
-Type win32icons help for a list of commands and their arguments.
+<assemblyfile>    A .NET assembly (or any PE file really) that you want
+                  to add icons to.
+
+[iconfile 1-n]    One or more .ico files that you want to insert into
+                  the assembly.
 ");
-        }
-
-        private void Compose()
-        {
-            var first = new AssemblyCatalog(Assembly.GetExecutingAssembly());
-            var container = new CompositionContainer(first);
-            container.ComposeParts(this);
-            Commands.Sort((c1, c2) => c1.Name.CompareTo(c2.Name));
         }
     }
 }
