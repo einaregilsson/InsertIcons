@@ -16,7 +16,7 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// Directory header.
         /// </summary>
-        protected Kernel32.GRPICONDIRENTRY _header;
+        internal Kernel32.GRPICONDIRENTRY _header;
 
         /// <summary>
         /// Actual image.

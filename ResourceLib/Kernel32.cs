@@ -9,52 +9,6 @@ namespace Vestris.ResourceLib
     internal abstract class Kernel32
     {
         /// <summary>
-        /// A resource header.
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-        internal struct RESOURCE_HEADER
-        {
-            /// <summary>
-            /// Header length.
-            /// </summary>
-            internal UInt16 wLength;
-            /// <summary>
-            /// Data length.
-            /// </summary>
-            internal UInt16 wValueLength;
-            /// <summary>
-            /// Resource type.
-            /// </summary>
-            internal UInt16 wType;
-
-            /// <summary>
-            /// A new resource header of a given length.
-            /// </summary>
-            /// <param name="valueLength"></param>
-            internal RESOURCE_HEADER(UInt16 valueLength)
-            {
-                wLength = 0;
-                wValueLength = valueLength;
-                wType = 0;
-            }
-        }
-
-        /// <summary>
-        /// Resource header type.
-        /// </summary>
-        internal enum RESOURCE_HEADER_TYPE
-        {
-            /// <summary>
-            /// Binary data.
-            /// </summary>
-            BinaryData = 0,
-            /// <summary>
-            /// String data.
-            /// </summary>
-            StringData = 1
-        }
-
-        /// <summary>
         /// Language and code page combinations.
         /// The low-order word of each DWORD must contain a Microsoft language identifier, 
         /// and the high-order word must contain the IBM code page number. 
@@ -72,69 +26,6 @@ namespace Vestris.ResourceLib
             /// IBM code page number.
             /// </summary>
             internal UInt16 wCodePageIBM;
-        }
-
-        /// <summary>
-        /// This structure contains version information about a file. 
-        /// This information is language- and code page–independent.
-        /// http://msdn.microsoft.com/en-us/library/ms647001.aspx
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential, Pack = 2)]
-        internal struct VS_FIXEDFILEINFO
-        {
-            /// <summary>
-            /// Contains the value 0xFEEF04BD. This is used with the szKey member of the VS_VERSIONINFO structure when searching a file for the VS_FIXEDFILEINFO structure. 
-            /// </summary>
-            internal UInt32 dwSignature;
-            /// <summary>
-            /// Specifies the binary version number of this structure. The high-order word of this member contains the major version number, and the low-order word contains the minor version number.
-            /// </summary>
-            internal UInt32 dwStrucVersion;
-            /// <summary>
-            /// Specifies the most significant 32 bits of the file's binary version number. This member is used with dwFileVersionLS to form a 64-bit value used for numeric comparisons.
-            /// </summary>
-            internal UInt32 dwFileVersionMS;
-            /// <summary>
-            /// Specifies the least significant 32 bits of the file's binary version number. This member is used with dwFileVersionMS to form a 64-bit value used for numeric comparisons.
-            /// </summary>
-            internal UInt32 dwFileVersionLS;
-            /// <summary>
-            /// Specifies the most significant 32 bits of the binary version number of the product with which this file was distributed. This member is used with dwProductVersionLS to form a 64-bit value used for numeric comparisons.
-            /// </summary>
-            internal UInt32 dwProductVersionMS;
-            /// <summary>
-            /// Specifies the least significant 32 bits of the binary version number of the product with which this file was distributed. This member is used with dwProductVersionMS to form a 64-bit value used for numeric comparisons.
-            /// </summary>
-            internal UInt32 dwProductVersionLS;
-            /// <summary>
-            /// Contains a bitmask that specifies the valid bits in dwFileFlags. A bit is valid only if it was defined when the file was created. 
-            /// </summary>
-            internal UInt32 dwFileFlagsMask;
-            /// <summary>
-            /// Contains a bitmask that specifies the Boolean attributes of the file.
-            /// </summary>
-            internal UInt32 dwFileFlags;
-            /// <summary>
-            /// Specifies the operating system for which this file was designed.
-            /// </summary>
-            internal UInt32 dwFileOS;
-            /// <summary>
-            /// Specifies the general type of file. 
-            /// </summary>
-            internal UInt32 dwFileType;
-            /// <summary>
-            /// Specifies the function of the file.
-            /// </summary>
-            internal UInt32 dwFileSubtype;
-            /// <summary>
-            /// Specifies the most significant 32 bits of the file's 64-bit binary creation date and time stamp.
-            /// </summary>
-            internal UInt32 dwFileDateMS;
-            /// <summary>
-            /// Specifies the least significant 32 bits of the file's 64-bit binary creation date and time stamp.
-            /// </summary>
-            internal UInt32 dwFileDateLS;
-
         }
 
         /// <summary>
@@ -548,46 +439,5 @@ namespace Vestris.ResourceLib
         /// US-English sublanguage ID.
         /// </summary>
         internal const UInt16 SUBLANG_ENGLISH_US = 1;
-
-        /// <summary>
-        /// CREATEPROCESS_MANIFEST_RESOURCE_ID is used primarily for EXEs. If an executable has a resource of type RT_MANIFEST, 
-        /// ID CREATEPROCESS_MANIFEST_RESOURCE_ID, Windows will create a process default activation context for the process. 
-        /// The process default activation context will be used by all components running in the process. 
-        /// CREATEPROCESS_MANIFEST_RESOURCE_ID can also used by DLLs. When Windows probe for dependencies, if the dll has 
-        /// a resource of type RT_MANIFEST, ID CREATEPROCESS_MANIFEST_RESOURCE_ID, Windows will use that manifest as the 
-        /// dependency. 
-        /// </summary>
-        internal const UInt16 CREATEPROCESS_MANIFEST_RESOURCE_ID  = 1;
-        /// <summary>
-        /// ISOLATIONAWARE_MANIFEST_RESOURCE_ID is used primarily for DLLs. It should be used if the dll wants private 
-        /// dependencies other than the process default. For example, if an dll depends on comctl32.dll version 6.0.0.0. 
-        /// It should have a resource of type RT_MANIFEST, ID ISOLATIONAWARE_MANIFEST_RESOURCE_ID to depend on comctl32.dll 
-        /// version 6.0.0.0, so that even if the process executable wants comctl32.dll version 5.1, the dll itself will still 
-        /// use the right version of comctl32.dll. 
-        /// </summary>
-        internal const UInt16 ISOLATIONAWARE_MANIFEST_RESOURCE_ID = 2;
-        /// <summary>
-        /// When ISOLATION_AWARE_ENABLED is defined, Windows re-defines certain APIs. For example LoadLibraryExW 
-        /// is redefined to IsolationAwareLoadLibraryExW. 
-        /// </summary>
-        internal const UInt16 ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID = 3;
-        /// <summary>
-        /// Resource manifest type.
-        /// </summary>
-        internal enum ManifestType
-        {
-            /// <summary>
-            /// CREATEPROCESS_MANIFEST_RESOURCE_ID
-            /// </summary>
-            CreateProcess = CREATEPROCESS_MANIFEST_RESOURCE_ID,
-            /// <summary>
-            /// ISOLATIONAWARE_MANIFEST_RESOURCE_ID
-            /// </summary>
-            IsolationAware = ISOLATIONAWARE_MANIFEST_RESOURCE_ID,
-            /// <summary>
-            /// ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID
-            /// </summary>
-            IsolationAwareNonstaticImport = ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID
-        }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.ComponentModel.Composition;
 using Vestris.ResourceLib;
 
@@ -16,24 +14,38 @@ namespace EinarEgilsson.Utilities.Win32Icons
         
         public void Execute(string filename, string[] args)
         {
-            //var info = new ResourceInfo();
-            //info.Load(filename);
+            ushort iconMaxId = 0;
+            int groupIconMaxId = 0;
+            using (var info = new ResourceInfo())
+            {
+                info.Load(filename);
 
-            //if (info.Resources.ContainsKey(new ResourceId(Kernel32.ResourceTypes.RT_GROUP_ICON)))
-            //{
-            //    foreach (IconDirectoryResource groupIcon in info.Resources[new ResourceId(Kernel32.ResourceTypes.RT_GROUP_ICON)])
-            //    {
-            //        if ((int)groupIcon.Name.Id > (int)groupIconIdCounter)
-            //        {
-            //            groupIconIdCounter = groupIcon.Name.Id;
-            //        }
-            //        foreach (var icon in groupIcon.Icons)
-            //        {
-            //            iconIdCounter = Math.Max(iconIdCounter, icon.Id);
-            //        }
-            //    }
-            //}
+                ResourceId groupIconId = new ResourceId(Kernel32.ResourceTypes.RT_GROUP_ICON);
+                if (info.Resources.ContainsKey(groupIconId))
+                {
+                    iconMaxId = info.Resources[groupIconId].OfType<IconDirectoryResource>().Max(idr => idr.Icons.Max(icon => icon.Id));
+                    groupIconMaxId = info.Resources[groupIconId].OfType<IconDirectoryResource>().Max(ir => (int)ir.Name.Id);
+                    foreach (IconDirectoryResource r in info.Resources[groupIconId])
+                    {
+                        IntPtr s = r.Name.Id;
+                    }
+                }
 
+            }
+
+            foreach (string icoFile in args)
+            {
+                IconDirectoryResource newIcon = new IconDirectoryResource(new IconFile(icoFile));
+                groupIconMaxId++;
+                newIcon.Name.Id = (IntPtr) groupIconMaxId;
+                newIcon.Name.Name = newIcon.Name.Id.ToString();
+
+                foreach (var icon in newIcon.Icons)
+                {
+                    icon.Id = ++iconMaxId;
+                }
+                newIcon.SaveTo(filename);
+            }
         }
     }
 }

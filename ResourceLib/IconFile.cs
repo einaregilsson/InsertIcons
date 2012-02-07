@@ -69,6 +69,21 @@ namespace Vestris.ResourceLib
             LoadFrom(filename);
         }
 
+        internal IconFile(IconDirectoryResource res)
+        {
+            _icons.Clear();
+
+            _header = new Kernel32.FILEGRPICONDIR();
+            _header.wCount = res._header.wImageCount;
+            _header.wReserved = res._header.wReserved;
+            _header.wType = res._header.wType;
+
+            for (int i = 0; i < _header.wCount; i++)
+            {
+                _icons.Add(new IconFileIcon(res.Icons[0]));
+            }
+        }
+
         /// <summary>
         /// Load from a .ico file.
         /// </summary>

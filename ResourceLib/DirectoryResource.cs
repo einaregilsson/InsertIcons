@@ -13,7 +13,7 @@ namespace Vestris.ResourceLib
     internal class DirectoryResource<ImageResourceType> : Resource
         where ImageResourceType : IconImageResource, new()
     {
-        Kernel32.GRPICONDIR _header = new Kernel32.GRPICONDIR();
+        internal Kernel32.GRPICONDIR _header = new Kernel32.GRPICONDIR();
         List<ImageResourceType> _icons = new List<ImageResourceType>();
 
         /// <summary>

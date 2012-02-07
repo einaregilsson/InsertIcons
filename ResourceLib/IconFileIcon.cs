@@ -50,6 +50,18 @@ namespace Vestris.ResourceLib
 
         }
 
+        internal IconFileIcon(IconImageResource res)
+        {
+            _header.bColors = res._header.bColors;
+            _header.bHeight = res._header.bHeight;
+            _header.bReserved = res._header.bReserved;
+            _header.bWidth = res._header.bWidth;
+            _header.wBitsPerPixel = res._header.wBitsPerPixel;
+            _header.dwImageSize = res._header.dwImageSize;
+            _header.wPlanes = res._header.wPlanes;
+            _image = new DeviceIndependentBitmap(res.Image);
+        }
+
         /// <summary>
         /// Icon width.
         /// </summary>
@@ -99,6 +111,7 @@ namespace Vestris.ResourceLib
 
             return new IntPtr(lpData.ToInt32() + Marshal.SizeOf(_header));
         }
+
 
         /// <summary>
         /// Icon size as a string.
