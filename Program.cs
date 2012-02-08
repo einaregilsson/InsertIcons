@@ -24,7 +24,7 @@ namespace EinarEgilsson.Utilities.InsertIcons
                 string assembly = args[0];
                 string[] iconFiles = args.Skip(1).ToArray();
                 ushort iconMaxId = 0;
-                int groupIconMaxId = 0;
+                int maxGroupIconId = 0;
                 using (var info = new ResourceInfo())
                 {
                     info.Load(assembly);
@@ -33,22 +33,18 @@ namespace EinarEgilsson.Utilities.InsertIcons
                     if (info.Resources.ContainsKey(groupIconId))
                     {
                         iconMaxId = info.Resources[groupIconId].OfType<IconDirectoryResource>().Max(idr => idr.Icons.Max(icon => icon.Id));
-                        groupIconMaxId = info.Resources[groupIconId].OfType<IconDirectoryResource>().Max(ir => (int)ir.Name.Id);
-                        foreach (IconDirectoryResource r in info.Resources[groupIconId])
-                        {
-                            IntPtr s = r.Name.Id;
-                        }
+                        maxGroupIconId = info.Resources[groupIconId].OfType<IconDirectoryResource>().Max(idr => int.Parse(idr.Name.Name));
                     }
-
                 }
-
                 foreach (string icoFile in iconFiles)
                 {
+                    maxGroupIconId++;
+                    while (IsSystemIconId(maxGroupIconId))
+                    {
+                        maxGroupIconId++;
+                    }
                     IconDirectoryResource newIcon = new IconDirectoryResource(new IconFile(icoFile));
-                    groupIconMaxId++;
-                    newIcon.Name.Id = (IntPtr)groupIconMaxId;
-                    newIcon.Name.Name = newIcon.Name.Id.ToString();
-
+                    newIcon.Name.Id = new IntPtr(maxGroupIconId);
                     foreach (var icon in newIcon.Icons)
                     {
                         icon.Id = ++iconMaxId;
@@ -62,6 +58,9 @@ namespace EinarEgilsson.Utilities.InsertIcons
                 Console.Error.WriteLine("error: {0}", ex.Message);
                 return 1;
             }
+        }
+        private static bool IsSystemIconId(int id) {
+            return id >= 32512 && id <= 32518;
         }
 
         private static void PrintUsage()

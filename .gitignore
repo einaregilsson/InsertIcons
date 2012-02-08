@@ -1,4 +1,9 @@
 bin/*
+
 obj/*
+
 *.suo
+
 *.user
+TestApp/bin/*
+TestApp/obj/*
