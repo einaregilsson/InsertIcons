@@ -1,4 +1,5 @@
-﻿# InsertIcons
+﻿InsertIcons
+===========
 
 A simple console program to add multiple icons to a .NET application. To learn more about why you might need this and for a more detailed description of the program see the blog post at http://einaregilsson.com/add-multiple-icons-to-net-application/.
 
