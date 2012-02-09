@@ -1,5 +1,5 @@
 ﻿InsertIcons
-===========
+-----------
 
 A simple console program to add multiple icons to a .NET application. To learn more about why you might need this and for a more detailed description of the program see the blog post at http://einaregilsson.com/add-multiple-icons-to-net-application/.
 
@@ -37,4 +37,4 @@ The program takes two parameters. Below is the help output from the program to s
                          stream. This allows for filenames to be piped into
                          the program, e.g. 
                           
-                             dir /b /s *ico | InsertIcons myfile.exe
+                             dir /b /s *.ico | InsertIcons myfile.exe

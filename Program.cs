@@ -208,7 +208,7 @@ Usage: InsertIcons <assemblyfile> <icons>
                      stream. This allows for filenames to be piped into
                      the program, e.g. 
                           
-                         dir /b /s *ico | InsertIcons myfile.exe
+                         dir /b /s *.ico | InsertIcons myfile.exe
 
 ");
         }
