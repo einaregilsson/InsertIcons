@@ -152,7 +152,7 @@ namespace EinarEgilsson.Utilities.InsertIcons
 
             if (Directory.Exists(param))
             {
-                return Directory.GetFiles(param, "*.ico").ToList();
+                return Directory.GetFiles(param, "*.ico").OrderBy(s=>s).ToList();
             }
 
             if (File.Exists(param))
