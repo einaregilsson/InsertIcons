@@ -2,7 +2,7 @@
 MIT License
 
 Copyright (c) 2012 Einar Egilsson
-http://einaregilsson.com/add-multiple-icons-to-net-application/
+http://einaregilsson.com/add-multiple-icons-to-a-dotnet-application/
  
 
 This program is heavily based on MIT licensed code from ResourceLib (http://resourcelib.codeplex.com/)
@@ -181,8 +181,8 @@ namespace EinarEgilsson.Utilities.InsertIcons
             Console.WriteLine(@"
 InsertIcons  Copyright (C) 2012 Einar Egilsson
 
-See http://einaregilsson.com/add-multiple-icons-to-net-application/ for
-more information about this program and how to use it.
+See http://einaregilsson.com/add-multiple-icons-to-a-dotnet-application/ 
+for more information about this program and how to use it.
 
 Usage: InsertIcons <assemblyfile> <icons>
 
