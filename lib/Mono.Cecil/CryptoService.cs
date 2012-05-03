@@ -1,0 +1,144 @@
+//
+// CryptoService.cs
+//
+// Author:
+//   Jb Evain (jbevain@gmail.com)
+//
+// Copyright (c) 2008 - 2011 Jb Evain
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+//
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Runtime.Serialization;
+using Mono.Security.Cryptography;
+
+namespace Mono.Cecil {
+
+    public class AssemblyHeaderInfo
+    {
+        public int StrongNamePointer { get; set; }
+        public int StrongNameSize { get; set; }
+        public int HeaderSize { get; set; }
+        public int TextSectionPointer { get; set; }
+    }
+	// Most of this code has been adapted
+	// from Jeroen Frijters' fantastic work
+	// in IKVM.Reflection.Emit. Thanks!
+
+	static class CryptoService {
+
+		public static void StrongName (Stream stream, AssemblyHeaderInfo info, StrongNameKeyPair key_pair)
+		{
+			int strong_name_pointer;
+
+			var strong_name = CreateStrongName (key_pair, HashStream (stream, info));
+			PatchStrongName (stream, info.StrongNamePointer, strong_name);
+		}
+
+		static void PatchStrongName (Stream stream, int strong_name_pointer, byte [] strong_name)
+		{
+			stream.Seek (strong_name_pointer, SeekOrigin.Begin);
+			stream.Write (strong_name, 0, strong_name.Length);
+		}
+
+		static byte [] CreateStrongName (StrongNameKeyPair key_pair, byte [] hash)
+		{
+			const string hash_algo = "SHA1";
+
+			using (var rsa = key_pair.CreateRSA ()) {
+				var formatter = new RSAPKCS1SignatureFormatter (rsa);
+				formatter.SetHashAlgorithm (hash_algo);
+
+				byte [] signature = formatter.CreateSignature (hash);
+				Array.Reverse (signature);
+
+				return signature;
+			}
+		}
+
+		static byte [] HashStream (Stream stream, AssemblyHeaderInfo info)
+		{
+			const int buffer_size = 8192;
+
+
+			var sha1 = new SHA1Managed ();
+			var buffer = new byte [buffer_size];
+			using (var crypto_stream = new CryptoStream (Stream.Null, sha1, CryptoStreamMode.Write)) {
+
+				stream.Seek (0, SeekOrigin.Begin);
+				CopyStreamChunk (stream, crypto_stream, buffer, info.HeaderSize);
+
+
+				stream.Seek (info.TextSectionPointer, SeekOrigin.Begin);
+				CopyStreamChunk (stream, crypto_stream, buffer, (int) info.StrongNamePointer - info.TextSectionPointer);
+
+				stream.Seek (info.StrongNameSize, SeekOrigin.Current);
+				CopyStreamChunk (stream, crypto_stream, buffer, (int) (stream.Length - (info.StrongNamePointer + info.StrongNameSize)));
+			}
+
+			return sha1.Hash;
+		}
+		
+        static void CopyStreamChunk (Stream stream, Stream dest_stream, byte [] buffer, int length)
+		{
+			while (length > 0) {
+				int read = stream.Read (buffer, 0, System.Math.Min (buffer.Length, length));
+				dest_stream.Write (buffer, 0, read);
+				length -= read;
+			}
+		}
+
+	}
+
+	static partial class Mixin {
+
+		public static RSA CreateRSA (this StrongNameKeyPair key_pair)
+		{
+			byte [] key;
+			string key_container;
+
+			if (!TryGetKeyContainer (key_pair, out key, out key_container))
+				return CryptoConvert.FromCapiKeyBlob (key);
+
+			var parameters = new CspParameters {
+				Flags = CspProviderFlags.UseMachineKeyStore,
+				KeyContainerName = key_container,
+				KeyNumber = 2,
+			};
+
+			return new RSACryptoServiceProvider (parameters);
+		}
+
+		static bool TryGetKeyContainer (ISerializable key_pair, out byte [] key, out string key_container)
+		{
+			var info = new SerializationInfo (typeof (StrongNameKeyPair), new FormatterConverter ());
+			key_pair.GetObjectData (info, new StreamingContext ());
+
+			key = (byte []) info.GetValue ("_keyPairArray", typeof (byte []));
+			key_container = info.GetString ("_keyPairContainer");
+			return key_container != null;
+		}
+	}
+}
+
