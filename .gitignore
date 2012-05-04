@@ -2,7 +2,7 @@ bin/*
 obj/*
 *.suo
 *.user
-TestApp/bin/*
-TestApp/obj/*
+Tests/bin/*
+Tests/obj/*
 _ReSharper*
 
