@@ -1,0 +1,4 @@
+﻿icons\sec.ico
+
+icons\icon1.ico
+icons\cmd.ico

@@ -1,11 +1,15 @@
 ﻿/*
 MIT License
 
+InsertIcons, a program to add multiple icons to .NET applications. 
+
 Copyright (c) 2012 Einar Egilsson
 http://einaregilsson.com/add-multiple-icons-to-a-dotnet-application/
  
+This program includes other MIT licensed code from the following projects:
 
-This program is heavily based on MIT licensed code from ResourceLib (http://resourcelib.codeplex.com/)
+   * ResourceLib (https://github.com/dblock/resourcelib), to insert the icons.
+   * Mono (http://mono-project.com), for strong name signing assemblies.
 
 You may freely use and distribute this software under the terms of the following license agreement.
 
@@ -31,6 +35,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using Vestris.ResourceLib;
 using System.IO;
+using Mono.Security;
 
 [assembly: AssemblyTitle("InsertIcons")]
 [assembly: AssemblyDescription("Add multiple win32 icons to .NET assembly files")]
@@ -38,13 +43,13 @@ using System.IO;
 [assembly: AssemblyCopyright("Copyright © 2012 Einar Egilsson")]
 [assembly: ComVisible(false)]
 [assembly: Guid("56c67123-d4f9-4baf-910e-b4c8a1b7fd7d")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
 
 
-namespace EinarEgilsson.Utilities.InsertIcons
+namespace InsertIcons
 {
-    class Program
+    public class Program
     {
         //Start here because if the user has selected an app icon in VS then
         //it will get the id 32512, which is some kind of special id for app
@@ -53,7 +58,7 @@ namespace EinarEgilsson.Utilities.InsertIcons
         //the originally selected icon is the first one in the file.
         private const int StartIconId = 40000;
 
-        static int Main(string[] args)
+        public static int Main(string[] args)
         {
             if (args.Length == 0 || args.Length == 1 && Regex.IsMatch(args[0], @"^/(\?|h|help)$"))
             {
@@ -63,14 +68,28 @@ namespace EinarEgilsson.Utilities.InsertIcons
             try
             {
                 string assembly = args[0];
+
                 if (!File.Exists(assembly))
                 {
                     throw new FileNotFoundException("The file " + args[0] + " doesn't exist!");
                 }
                 List<string> iconFiles = GetIconFiles(args);
-
                 VerifyIconFiles(iconFiles);
 
+
+                string strongNameKeyFile = args.Length > 2 ? args[2] : null;
+                //Verify that the assembly is signed to begin with. We don't support signing unsigned assemblies,
+                //only re-signing them.
+                if (strongNameKeyFile != null)
+                {
+                    using (var stream = new FileStream(assembly, FileMode.Open, FileAccess.Read)) {
+                        var signature = new StrongName().StrongHash(stream, StrongName.StrongNameOptions.Signature);
+                        if (signature.SignaturePosition == 0 && signature.SignatureLength == 0)
+                        {
+                            throw new ArgumentException("Assembly is not strong named, InsertIcons can only re-sign assemblies, not sign unsigned assemblies." );
+                        }
+                    }
+                }
                 ushort iconMaxId = GetMaxIconId(assembly);
 
                 int groupIconIdCounter = StartIconId;
@@ -87,6 +106,10 @@ namespace EinarEgilsson.Utilities.InsertIcons
                     newIcon.SaveTo(assembly);
                 }
 
+                if (strongNameKeyFile != null)
+                {
+                    ResignAssembly(assembly, strongNameKeyFile);
+                }
                 Console.WriteLine("Successfully inserted {0} icons into {1}", iconFiles.Count, Path.GetFileName(assembly));
                 return 0;
             }
@@ -96,6 +119,18 @@ namespace EinarEgilsson.Utilities.InsertIcons
                 return 1;
             }
 
+        }
+
+        /// <summary>
+        /// Re-signs the assembly with a strong key after the icons have been inserted.
+        /// Throws an error if the assembly wasn't signed before, we don't handle signing
+        /// for the first time, only re-signing.
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <param name="strongNameKey"></param>
+        private static void ResignAssembly(string assembly, string strongNameKey)
+        {
+            new StrongName(File.ReadAllBytes(strongNameKey)).Sign(assembly);
         }
 
         /// <summary>
@@ -152,7 +187,7 @@ namespace EinarEgilsson.Utilities.InsertIcons
 
             if (Directory.Exists(param))
             {
-                return Directory.GetFiles(param, "*.ico").OrderBy(s=>s).ToList();
+                return Directory.GetFiles(param, "*.ico").OrderBy(s => s).ToList();
             }
 
             if (File.Exists(param))
@@ -184,7 +219,7 @@ InsertIcons  Copyright (C) 2012 Einar Egilsson
 See http://einaregilsson.com/add-multiple-icons-to-a-dotnet-application/ 
 for more information about this program and how to use it.
 
-Usage: InsertIcons <assemblyfile> <icons>
+Usage: InsertIcons <assemblyfile> <icons> [<keyfile>]
 
 <assemblyfile>    A .NET assembly (or any PE file really) that you want
                   to add icons to.
@@ -210,6 +245,15 @@ Usage: InsertIcons <assemblyfile> <icons>
                           
                          dir /b /s *.ico | InsertIcons myfile.exe
 
+<keyfile>         This parameter is optional. If it is included then the
+                  assembly will be re-signed with a strong name after 
+                  inserting the icons.
+                  
+                  Note that this should only be used to re-sign
+                  assemblies that were signed before inserting icons
+                  into them. If you pass in the <keyfile> parameter for
+                  a file that was not signed before then the program 
+                  will exit with an error message.
 ");
         }
     }

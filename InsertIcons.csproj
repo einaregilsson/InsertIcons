@@ -8,7 +8,7 @@
     <ProjectGuid>{C037D608-57FD-4ACD-AAC1-BFAD1767B11B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EinarEgilsson.Utilities.InsertIcons</RootNamespace>
+    <RootNamespace>InsertIcons</RootNamespace>
     <AssemblyName>InsertIcons</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -24,6 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -34,40 +35,43 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="lib\Mono.Security\Cryptography\CryptoConvert.cs" />
+    <Compile Include="lib\Mono.Security\StrongName.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ResourceLib\DeviceIndependentBitmap.cs">
+    <Compile Include="lib\ResourceLib\DeviceIndependentBitmap.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ResourceLib\DirectoryResource.cs" />
-    <Compile Include="ResourceLib\Gdi32.cs">
+    <Compile Include="lib\ResourceLib\DirectoryResource.cs" />
+    <Compile Include="lib\ResourceLib\Gdi32.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ResourceLib\IconDirectoryResource.cs" />
-    <Compile Include="ResourceLib\IconFile.cs" />
-    <Compile Include="ResourceLib\IconFileIcon.cs">
+    <Compile Include="lib\ResourceLib\IconDirectoryResource.cs" />
+    <Compile Include="lib\ResourceLib\IconFile.cs" />
+    <Compile Include="lib\ResourceLib\IconFileIcon.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ResourceLib\IconImageResource.cs" />
-    <Compile Include="ResourceLib\IconResource.cs">
+    <Compile Include="lib\ResourceLib\IconImageResource.cs" />
+    <Compile Include="lib\ResourceLib\IconResource.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ResourceLib\Kernel32.cs" />
-    <Compile Include="ResourceLib\Resource.cs" />
-    <Compile Include="ResourceLib\ResourceId.cs" />
-    <Compile Include="ResourceLib\ResourceInfo.cs" />
-    <Compile Include="ResourceLib\ResourceUtil.cs">
+    <Compile Include="lib\ResourceLib\Kernel32.cs" />
+    <Compile Include="lib\ResourceLib\Resource.cs" />
+    <Compile Include="lib\ResourceLib\ResourceId.cs" />
+    <Compile Include="lib\ResourceLib\ResourceInfo.cs" />
+    <Compile Include="lib\ResourceLib\ResourceUtil.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ResourceLib\User32.cs" />
+    <Compile Include="lib\ResourceLib\User32.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ResourceLib\License.txt" />
+    <Content Include="lib\ResourceLib\License.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
