@@ -63,12 +63,29 @@ namespace Vestris.ResourceLib
         /// <summary>
         /// An existing .ico file.
         /// </summary>
-        /// <param name="filename">An existing icon (.ico) file.</param>
-        internal IconFile(string filename)
+        internal IconFile(byte[] data)
         {
-            LoadFrom(filename);
+            LoadFrom(data);
         }
 
+        /// <summary>
+        /// Load from a .ico file.
+        /// </summary>
+        /// <param name="bytes">A byte array containing an icon (.ico) file.</param>
+        internal void LoadFrom(byte[] bytes)
+        {
+
+            IntPtr lpData = Marshal.AllocHGlobal(bytes.Length);
+            try
+            {
+                Marshal.Copy(bytes, 0, lpData, bytes.Length);
+                Read(lpData);
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(lpData);
+            }
+        }   
         /// <summary>
         /// Load from a .ico file.
         /// </summary>
@@ -76,17 +93,7 @@ namespace Vestris.ResourceLib
         internal void LoadFrom(string filename)
         {
             byte[] data = File.ReadAllBytes(filename);
-
-            IntPtr lpData = Marshal.AllocHGlobal(data.Length);
-            try
-            {
-                Marshal.Copy(data, 0, lpData, data.Length);
-                Read(lpData);
-            }
-            finally
-            {
-                Marshal.FreeHGlobal(lpData);
-            }
+            LoadFrom(data);
         }
 
         /// <summary>

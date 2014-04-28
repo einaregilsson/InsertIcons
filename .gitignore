@@ -5,4 +5,6 @@ obj/*
 Tests/bin/*
 Tests/obj/*
 _ReSharper*
+bin
+obj
 
