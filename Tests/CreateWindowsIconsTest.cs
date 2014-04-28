@@ -29,77 +29,76 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 using System;
 using System.Runtime.InteropServices;
-using NUnit.Framework;
+using Xunit;
 
 namespace CreateWindowsIcons.Tests
 {
-    [TestFixture]
     public class CreateWindowsIconsTest
     {
         [DllImport("mscoree.dll", CharSet = CharSet.Unicode)]
         private static extern bool StrongNameSignatureVerificationEx(string wszFilePath, bool fForceVerification,
             ref bool pfWasVerified);
 
-        [Test]
+        [Fact]
         public void AssemblyThatWasntSignedGetsIconsCreatedCorrectly()
         {
             string file = "Test.UnsignedAssembly.dll";
             var creator = new WindowsIconsCreator();
 
-            Assert.AreEqual(0, creator.GetIconCount(file));
+            Assert.Equal(0, creator.GetIconCount(file));
 
             creator.CreateIcons(file, null);
 
-            Assert.AreEqual(3, creator.GetIconCount(file));
+            Assert.Equal(3, creator.GetIconCount(file));
         }
 
-        [Test]
+        [Fact]
         public void AssemblyThatWasSignedGetsIconsCreatedCorrectlyButSignatureIsRuined()
         {
             string file = "Test.SignedAssembly.dll";
             var creator = new WindowsIconsCreator();
 
-            Assert.AreEqual(0, creator.GetIconCount(file));
+            Assert.Equal(0, creator.GetIconCount(file));
 
             creator.CreateIcons(file, null);
             bool wasVerified = false;
             bool isOK = StrongNameSignatureVerificationEx(file, true, ref wasVerified);
 
-            Assert.AreEqual(3, creator.GetIconCount(file));
-            Assert.IsFalse(wasVerified, "The file should not have been verified");
-            Assert.IsFalse(isOK, "Should have returned false, because the file is not signed");
+            Assert.Equal(3, creator.GetIconCount(file));
+            Assert.False(wasVerified, "The file should not have been verified");
+            Assert.False(isOK, "Should have returned false, because the file is not signed");
         }
 
-        [Test]
+        [Fact]
         public void AssemblyThatWasntSignedBeforeThrowsErrorIfKeyIsPassedIn()
         {
             string file = "Test.UnsignedAssembly.dll";
 
             bool wasVerified = false;
             bool isOK = StrongNameSignatureVerificationEx(file, true, ref wasVerified);
-            Assert.IsFalse(wasVerified, "The file should not have been verified");
-            Assert.IsFalse(isOK, "Should have returned false, because the file is not signed");
+            Assert.False(wasVerified, "The file should not have been verified");
+            Assert.False(isOK, "Should have returned false, because the file is not signed");
 
             Assert.Throws<ArgumentException>( () => new WindowsIconsCreator().CreateIcons(file, "Test.snk"));
         }
 
-        [Test]
+        [Fact]
         public void ResignAssembliesWithStrongNameKey()
         {
             string file = "Test.SignedAssembly.dll";
 
             bool wasVerified = false;
             bool isOK = StrongNameSignatureVerificationEx(file, true, ref wasVerified);
-            Assert.IsTrue(wasVerified, "The file should have been verified");
-            Assert.IsTrue(isOK, "Signature should be ok before adding icons");
+            Assert.True(wasVerified, "The file should have been verified");
+            Assert.True(isOK, "Signature should be ok before adding icons");
             var creator = new WindowsIconsCreator();
 
             creator.CreateIcons(file, "Test.snk");
 
             isOK = StrongNameSignatureVerificationEx(file, true, ref wasVerified);
-            Assert.IsTrue(wasVerified, "The file should have been verified");
-            Assert.IsTrue(isOK, "Signature should be ok after adding icons");
-            Assert.AreEqual(3, creator.GetIconCount(file));
+            Assert.True(wasVerified, "The file should have been verified");
+            Assert.True(isOK, "Signature should be ok after adding icons");
+            Assert.Equal(3, creator.GetIconCount(file));
 
         }
     }

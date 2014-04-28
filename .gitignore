@@ -7,4 +7,6 @@ Tests/obj/*
 _ReSharper*
 bin
 obj
+packages/*
+!packages/repositories.config
 
