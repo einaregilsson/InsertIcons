@@ -62,7 +62,7 @@ namespace CreateWindowsIcons
             //only re-signing them.
             if (!string.IsNullOrEmpty(strongNameKeyFile))
             {
-                if (assembly.GetName().GetPublicKey() == null)
+                if (assembly.GetName().GetPublicKey().Length == 0)
                 {
                     throw new ArgumentException("Assembly is not strong named, CreateWindowsIcons can only re-sign assemblies, not sign unsigned assemblies.");
                 }

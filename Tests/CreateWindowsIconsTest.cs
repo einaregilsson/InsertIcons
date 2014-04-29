@@ -28,6 +28,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
  */
 
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using Xunit;
 
@@ -42,7 +43,8 @@ namespace CreateWindowsIcons.Tests
         [Fact]
         public void AssemblyThatWasntSignedGetsIconsCreatedCorrectly()
         {
-            string file = "Test.UnsignedAssembly.dll";
+            string file = "Test.UnsignedAssembly.1.exe";
+            File.Copy(file.Replace(".1", ""), file);
             var creator = new WindowsIconsCreator();
 
             Assert.Equal(0, creator.GetIconCount(file));
@@ -55,9 +57,9 @@ namespace CreateWindowsIcons.Tests
         [Fact]
         public void AssemblyThatWasSignedGetsIconsCreatedCorrectlyButSignatureIsRuined()
         {
-            string file = "Test.SignedAssembly.dll";
+            string file = "Test.SignedAssembly.2.exe";
+            File.Copy(file.Replace(".2", ""), file);
             var creator = new WindowsIconsCreator();
-
             Assert.Equal(0, creator.GetIconCount(file));
 
             creator.CreateIcons(file, null);
@@ -72,7 +74,8 @@ namespace CreateWindowsIcons.Tests
         [Fact]
         public void AssemblyThatWasntSignedBeforeThrowsErrorIfKeyIsPassedIn()
         {
-            string file = "Test.UnsignedAssembly.dll";
+            string file = "Test.UnsignedAssembly.3.exe";
+            File.Copy(file.Replace(".3", ""), file);
 
             bool wasVerified = false;
             bool isOK = StrongNameSignatureVerificationEx(file, true, ref wasVerified);
@@ -85,7 +88,8 @@ namespace CreateWindowsIcons.Tests
         [Fact]
         public void ResignAssembliesWithStrongNameKey()
         {
-            string file = "Test.SignedAssembly.dll";
+            string file = "Test.SignedAssembly.4.exe";
+            File.Copy(file.Replace(".4", ""), file);
 
             bool wasVerified = false;
             bool isOK = StrongNameSignatureVerificationEx(file, true, ref wasVerified);
