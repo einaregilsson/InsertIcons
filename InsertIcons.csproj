@@ -41,38 +41,12 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="lib\Mono.Security\Cryptography\CryptoConvert.cs" />
     <Compile Include="lib\Mono.Security\StrongName.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="lib\ResourceLib\DeviceIndependentBitmap.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="lib\ResourceLib\DirectoryResource.cs" />
-    <Compile Include="lib\ResourceLib\Gdi32.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="lib\ResourceLib\IconDirectoryResource.cs" />
-    <Compile Include="lib\ResourceLib\IconFile.cs" />
-    <Compile Include="lib\ResourceLib\IconFileIcon.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="lib\ResourceLib\IconImageResource.cs" />
-    <Compile Include="lib\ResourceLib\IconResource.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="lib\ResourceLib\Kernel32.cs" />
-    <Compile Include="lib\ResourceLib\Resource.cs" />
-    <Compile Include="lib\ResourceLib\ResourceId.cs" />
-    <Compile Include="lib\ResourceLib\ResourceInfo.cs" />
-    <Compile Include="lib\ResourceLib\ResourceUtil.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="lib\ResourceLib\User32.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="lib\ResourceLib\License.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -80,6 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Vestris.ResourceLib" Version="2.1.0" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
